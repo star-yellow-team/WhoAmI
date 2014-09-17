@@ -7,3 +7,6 @@ ADRIAN ROCKS xP
 Miruna was here ! ;)
 Hugs and kisses :]
 Github problems.
+
+Code convetion:
+http://msdn.microsoft.com/en-us/library/ff926074.aspx
