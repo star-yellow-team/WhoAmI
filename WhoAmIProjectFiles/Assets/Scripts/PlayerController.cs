@@ -5,8 +5,8 @@ public class PlayerController : MonoBehaviour {
 
 	private Vector2 movement;
 	public float unitX = 10f;
-	public float unitY = 400f;
-	private float maxVelocity = 5f;
+	public float unitY = 300f;
+	private float maxVelocity = 3f;
 	private bool goingRight = true;
 	private bool jumped;
 	private float time;
@@ -37,11 +37,10 @@ public class PlayerController : MonoBehaviour {
 		
 		float velocityX = rigidbody2D.velocity.x;
 		float velocityY = rigidbody2D.velocity.y;
-		Debug.Log(rigidbody2D.velocity);
 		
-		transform.localScale = new Vector3(goingRight ? 1 : -1, 1, 1);
-		rigidbody2D.AddForce (new Vector2 (velocityX < maxVelocity ? movement.x : 0
-											,velocityY < maxVelocity ? movement.y : 0));
+		transform.localScale = new Vector3(goingRight ? 1 : -1, 1, 1);		
+		rigidbody2D.AddForce (new Vector2 (Mathf.Abs(velocityX) < maxVelocity ? movement.x : 0,
+											Mathf.Abs(velocityY) < maxVelocity ? movement.y : 0));
 
 	}
 
@@ -67,7 +66,7 @@ public class PlayerController : MonoBehaviour {
 			}
 			else if(time < 0.6f && time > 0.3f)
 			{
-				movement.y += unitY;
+				movement.y += unitY/2;
 				time = 0.6f;
 			}
 		}
