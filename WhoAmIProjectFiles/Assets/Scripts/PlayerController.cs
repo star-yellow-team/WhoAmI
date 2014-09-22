@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController: MonoBehaviour {
 
 	private Vector2 movement;
 	public float unitX = 10f;
@@ -10,15 +10,15 @@ public class PlayerController : MonoBehaviour {
 	private bool goingRight = true;
 	private bool jumped;
 	private float time;
-	private Animator animator;
+
+	private Animator anim;
 
 	void Start () {
 		movement.x = 0f;
 		movement.y = 0f;
 		time = 0f;
 		jumped = false;
-		animator = GetComponent<Animator> ();
-		animator.SetBool ("moving", false);
+		anim = GetComponent<Animator> ();
 	}
 
 	void Update () {
@@ -26,15 +26,15 @@ public class PlayerController : MonoBehaviour {
 		time += Time.deltaTime;
 		ProcessInput ();
 
-		if (movement.x != 0 || movement.y != 0 || jumped)
+		if (movement.x != 0 && !jumped)
 		{
-			animator.SetBool("moving", true);
+			anim.SetBool("moving", true);
 		}
 		else
 		{
-			animator.SetBool("moving", false);
+			anim.SetBool("moving", false);
 		}
-		
+
 		float velocityX = rigidbody2D.velocity.x;
 		float velocityY = rigidbody2D.velocity.y;
 		
