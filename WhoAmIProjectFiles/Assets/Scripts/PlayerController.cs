@@ -10,10 +10,13 @@ public class PlayerController: MonoBehaviour {
 	private bool goingRight = true;
 	private bool jumped;
 	private float time;
-
+	private float health;
 	private Animator anim;
 
-	void Start () {
+
+	void Start ()
+	{
+		health = 100f;
 		movement.x = 0f;
 		movement.y = 0f;
 		time = 0f;
@@ -21,7 +24,9 @@ public class PlayerController: MonoBehaviour {
 		anim = GetComponent<Animator> ();
 	}
 
-	void Update () {
+
+	void Update ()
+	{
 		movement.x = movement.y = 0f;
 		time += Time.deltaTime;
 		ProcessInput ();
@@ -43,6 +48,7 @@ public class PlayerController: MonoBehaviour {
 											Mathf.Abs(velocityY) < maxVelocity ? movement.y : 0));
 
 	}
+
 
 	void ProcessInput()
 	{
@@ -73,9 +79,22 @@ public class PlayerController: MonoBehaviour {
 
 	}
 
+
 	void OnCollisionEnter2D(Collision2D col)
 	{
 		jumped = false;
 		time = 0f;
+	}
+
+	void Damage(float rate)
+	{
+		health -= rate;
+	}
+
+
+	void OnParticleCollision(GameObject o)
+	{
+		Debug.Log("g");
+	
 	}
 }
